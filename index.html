@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+   <head>
+    <title>Etch-A-Sketch</title>
+    <link href="style.css" rel="stylesheet" type="text/css">
+   </head>
+   <body>
+    <div id="main">
+        <center><h1>Etch A Sketch</h1>
+        <button onclick="enterGrid()"> Reset </button> </center>
+    </div>
+    <div id="container"></div>
+    <script>
+        const x = 16;
+        let container = document.querySelector('#container');
+        makeGrid(x);
+        sketch();
+        function makeGrid(num) {
+            let i = 0;
+            for(i=0 ; i < num*num ; i++) {
+                let grid = document.createElement('div');
+                grid.classList.add("sqr");
+                grid.style.border = "1px solid grey";
+                container.appendChild(grid);
+            }
+            container.style.cssText = ("grid-template-columns: repeat(" + num + ", 1fr); grid-template-rows: repeat(" + num + ", 1fr)");
+        }
+        function enterGrid(){
+            while(container.firstChild){
+                container.removeChild(container.firstChild);
+            }
+            let n = Number(prompt("Enter How Many Boxes Do You Want In The Grid ?? "));
+            makeGrid(n);
+            sketch();
+        }
+        function sketch() {
+            const color = document.querySelectorAll(".sqr");
+            for(let i=0 ; i < color.length ; i++) {
+                color[i].addEventListener("mouseenter",function(e) {
+                    e.target.style.cssText = "background-color : red" ;
+                 }); 
+            }
+            }
+    </script>
+   </body>
+</html>
